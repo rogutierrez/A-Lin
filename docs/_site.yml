@@ -1,0 +1,12 @@
+name: "a-lin"
+output_dir: "docs"
+navbar:
+  title: "Apunte Lineal"
+left:
+  - text: "Home"
+href: index.html
+- text: "Apunte"
+href: a-lin.html
+output:
+  html_document:
+  theme: cosmo
