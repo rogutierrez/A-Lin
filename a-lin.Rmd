@@ -1,0 +1,123 @@
+---
+title: "a-lin"
+author: "RG"
+date: "24-10-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Coordenadas de un vector respecto a una base $B$.
+
+Sea $V_k$ y $B=\{v_1,v_2,\dotsc, v_n\}$ una base de $V$. Se llama coordenadas del vector $v \in V$ respecto a los escalares que intervienen en la combinación lineal
+$$v=\alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n $$
+y su notación es
+$$[v]_B = (\alpha_1, \alpha_2, \dots, \alpha_n)$$
+Ejemplo (1): Sea la base $B=\{ (-1,0,0),(0,1,0),(1,0,-3) \}$ de $\mathbb{R}^3$, las coordenadas del vector $(1,2,3)$ respecto de esta base son:
+
+\begin{equation*}
+(1,2,3) = a(-1,0,0) + b(0,1,0) + c(1,0,-3)\\
+\implies (-a+c, b , -3c) = (1,2,3) 
+\end{equation*}
+Resolviendo el sistema vemos que $a=-2$, $b=2$ y $c=-1$, entonces el vector $(1,2,3)$, respecto a la base $B$, es $(-2,2,-1)$:
+$$[(1,2,3)]_B=(-2,2,-1)$$
+
+## Matriz Cambio de Base
+
+La matriz cambio de base de $B_1=(v_1,v_2,\dots,v_n)$ y $B_2=(u_1,u_2,\dots,u_n)$, bases de $V$, se obtiene escribiendo como columna las coordenadas de los elementos de la base $B_1$ respecto de la base $B_2$
+$$\left[ [v_1]_{B_2}, \dots, [v_n]_{B_2} \right]$$
+y un vector $v\in V$ escrito en la base $B_1$, se puede escribir en la base $B_2$ como
+$$\left[ \left[ v \right]_{B_2} \right] = \left[ [v_1]_{B_2}, \dots, [v_n]_{B_2} \right] \cdot \left[ \left[ v \right]_{B_1} \right]$$
+Ejemplo (2): Sean las bases $B_1=\{(1,0),(1,3\}$ y $B_2=\{(0,1),(1,1\}$.
+
+a) Encuentre la matriz de cambio de base de $B_1$ a $B_2$.
+
+b) Encuentre $[(1,1)]_{B_2}$, con $(1,1)$ escrito en $B_1$.
+
+Solución:
+
+a) Primero escribimos los vectores de la base $B_1$ en base $B_2$:
+$$(1,0)=a(0,1)+b(1,1)=(b,a+b) \implies b=1 \land a=-1$$
+$$(1,3)=a(0,1)+b(1,1)=(b,a+b) \implies b=1 \land a=2$$
+Así, $[(1,0)]_{B_2}=(-1,1)$ y $[(1,3)]_{B_2}=(2,1)$.
+
+Entonces la matriz cambio de base es
+$$\left( \begin{array}{cc}
+ -1 & 2\\ 
+ 1 & 1\\
+\end{array} \right) $$
+
+b) 
+\begin{align*}
+[(1,1)]_{B_2} &= \left( \begin{array}{cc}
+ -1 & 2\\ 
+ 1 & 1\\
+\end{array} \right) \cdot 
+\left( \begin{array}{c} 1\\  1\\\end{array} \right) \\
+&= \left( \begin{array}{c} -1+2\\  1+1\\\end{array} \right) \\
+&= \left( \begin{array}{c} 1\\  2\\\end{array} \right) \\
+\end{align*}
+Así, finalmente $[(1,1)]_{B_2}=(1,2)$
+
+
+## Proceso de Ortogonalización de Gram-Schmidt
+
+El proceso Gram-Schmidt (G-S) es un algoritmo sencillo para producir una base ortogonal u ortonormal para cualquier subespacio diferente de cero de $\mathbb{R}^n$. En otras palabras, lo que hace el siguiente algoritmo es entregar un conjunto de vectores que generan el mismo espacio que el conjunto original, pero a diferencia del primero, este conjunto posee vectores ortogonales entre sí.
+
+> 
+Algoritmo:
+>
+Dada una base $\{w_1, w_2, \dotsc , w_n  \}$ para un subespacio $W$ de $\mathbb{R}^n$, defina
+\begin{align*} 
+v_1 & =w_1 \\
+v_2 &= w_2 - \dfrac{w_2 \cdot v_1}{v_1 \cdot v_1}v_1 \\
+v_3 &= w_3 - \dfrac{w_3 \cdot v_1}{v_1 \cdot v_1}v_1 - \dfrac{w_3 \cdot v_2}{v_2 \cdot v_2}v_2 \\
+&\vdots \\
+v_n &= w_n - \dfrac{w_n \cdot v_1}{v_1 \cdot v_1}v_1 - \dfrac{w_n \cdot v_2}{v_2 \cdot v_2}v_2 - \dotsb - \dfrac{w_n \cdot v_{n-1}}{v_{n-1} \cdot v_{n-1} }v_{n-1}  \\
+\end{align*}
+Entonces $\{v_1,v_2,...,v_n\}$ es una base ortogonal para $W$.
+
+Para construir una base ortonormal sólo normalice todas las $v_i$ (hacer los vectores unitarios). Así, una base ortonormal para $W$ será 
+$$\left\{ \dfrac{v_1}{\|v_1\|},\dfrac{v_2}{\|v_2\|},\dotsc,\dfrac{v_n}{\|v_n\|} \right\}$$
+
+* Ejemplo (2)
+
+Sea $W$ un subespacio vectorial de $\mathbb{R}^n$ que tiene por base $\left\{(3,6,0), (1,2,2) \right\}$. Construya una base ortonormal para $W$.
+
+Solución: Dado que el conjunto ya es base de $W$, aplicamos directamente el algoritmo G-S con $w_1=(3,6,0)$ y $w_2=(1,2,2)$:
+\begin{align*} 
+v_1 &= (3,6,0) \\
+v_2 &= (1,2,2) - \dfrac{(1,2,2) \cdot (3,6,0)}{(3,6,0) \cdot (3,6,0)}(3,6,0) \\
+    &= (1,2,2) - \dfrac{1\cdot 3+2 \cdot 6 + 2 \cdot 0}{3 \cdot 3 + 6 \cdot 6 + 0 \cdot 0}(3,6,0) \\
+    &= (1,2,2) - \dfrac{15}{45}(3,6,0) \\
+    &= (1,2,2) - \dfrac{1}{3}(3,6,0) \\
+    &= (1,2,2) - (1,2,0) \\
+    &= (0,0,2) \\
+\end{align*}
+Así, una base ortogonal para $W$ es $\left\{ v_1, v_2 \right\}=\left\{(3,6,0), (0,0,2) \right\}$. Ahora para encontrar una base ortonormal normalizalos $v_1$ y $v_2$:
+
+$\dfrac{v_1}{\|v_1\|} = \dfrac{(3,6,0)}{\sqrt{3^2+6^2+0^2}}= \dfrac{(3,6,0)}{\sqrt{45}} = \left( \dfrac{3}{\sqrt{45}}, \dfrac{6}{\sqrt{45}}, 0 \right)$
+
+$\dfrac{v_1}{\|v_1\|} = \dfrac{(0,0,2)}{\sqrt{0^2+0^2+2^2}}= \dfrac{(0,0,2)}{2} = \left( 0, 0, 1 \right)$
+
+Así finalmente una base ortonormal para $W$ es $\left\{ \dfrac{v_1}{\|v_1\|}, \dfrac{v_2}{\|v_2\|} \right\} = \left\{ \left( \dfrac{3}{\sqrt{45}}, \dfrac{6}{\sqrt{45}}, 0 \right), (0,0,1) \right\}$
+
+----------------------------
+* Ejemplo (3)
+Encuentre una base ortonormal para el subespacio de $\mathbb{R}^4$ generado por los vectores $(1,1,1,1)$, $(0,1,1,1)$ y $(0,0,1,1)$.
+
+Solución: Usando el proceso de G-S, tenemos que
+\begin{align*}
+v_1 &= (1,1,1,1)\\
+v_2 &= (0,1,1,1) - \dfrac{(0,1,1,1)\cdot (1,1,1,1)}{(1,1,1,1)\cdot(1,1,1,1)} (1,1,1,1)\\
+    &= \left( \frac{-3}{4}, \frac{1}{4}, \frac{1}{4}, \frac{1}{4} \right)\\
+\end{align*}
+Para facilitar los cálculos podemos multiplicar este vector por 4 de forma que $v_2=(-3,1,1,1)$
+\begin{align*}
+v_3 &= (0,0,1,1) - \frac{(0,0,1,1)\cdot(1,1,1,1)}{(1,1,1,1)\cdot(1,1,1,1)}(1,1,1,1)
+- \frac{(0,0,1,1)\cdot(-3,1,1,1)}{(-3,1,1,1)\cdot(-3,1,1,1)}(-3,1,1,1)\\
+&= \left( 0, \dfrac{-2}{3}, \dfrac{1}{3}, \dfrac{1}{3} \right)
+\end{align*}
+Así, tenemos una base ortogonal $\left\{ (1,1,1,1),  (-3,1,1,1), \left(0,-2,1, 1 \right) \right\}$. Para encontrar una base ortonormal basta con dividir cada vector en su norma como se mostró en el ejemplo anterior.
