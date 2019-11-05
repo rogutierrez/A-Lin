@@ -1,12 +1,12 @@
 ---
-title: "a-lin"
+title: "Apunte Álgebra lineal"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
  encoding=encoding,
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 author: "RG"
-date: "24-10-2019"
+date: "05-11-2019"
 output: html_document
 ---
 
@@ -20,7 +20,9 @@ Sea $V_k$ y $B=\{v_1,v_2,\dotsc, v_n\}$ una base de $V$. Se llama coordenadas de
 $$v=\alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n $$
 y su notación es
 $$[v]_B = (\alpha_1, \alpha_2, \dots, \alpha_n)$$
-Ejemplo (1): Sea la base $B=\{ (-1,0,0),(0,1,0),(1,0,-3) \}$ de $\mathbb{R}^3$, las coordenadas del vector $(1,2,3)$ respecto de esta base son:
+**Ejemplo** (Coordenadas de un vector respecto a una base):
+
+Sea la base $B=\{ (-1,0,0),(0,1,0),(1,0,-3) \}$ de $\mathbb{R}^3$, las coordenadas del vector $(1,2,3)$ respecto de esta base son:
 
 \begin{equation*}
 (1,2,3) = a(-1,0,0) + b(0,1,0) + c(1,0,-3)\\
@@ -35,7 +37,9 @@ La matriz cambio de base de $B_1=(v_1,v_2,\dots,v_n)$ y $B_2=(u_1,u_2,\dots,u_n)
 $$\left[ [v_1]_{B_2}, \dots, [v_n]_{B_2} \right]$$
 y un vector $v\in V$ escrito en la base $B_1$, se puede escribir en la base $B_2$ como
 $$\left[ \left[ v \right]_{B_2} \right] = \left[ [v_1]_{B_2}, \dots, [v_n]_{B_2} \right] \cdot \left[ \left[ v \right]_{B_1} \right]$$
-Ejemplo (2): Sean las bases $B_1=\{(1,0),(1,3\}$ y $B_2=\{(0,1),(1,1\}$.
+**Ejemplo** (Cambio de base):
+
+Sean las bases $B_1=\{(1,0),(1,3\}$ y $B_2=\{(0,1),(1,1\}$.
 
 a) Encuentre la matriz de cambio de base de $B_1$ a $B_2$.
 
@@ -87,7 +91,7 @@ Entonces $\{v_1,v_2,...,v_n\}$ es una base ortogonal para $W$.
 Para construir una base ortonormal sólo normalice todas las $v_i$ (hacer los vectores unitarios). Así, una base ortonormal para $W$ será 
 $$\left\{ \dfrac{v_1}{\|v_1\|},\dfrac{v_2}{\|v_2\|},\dotsc,\dfrac{v_n}{\|v_n\|} \right\}$$
 
-* Ejemplo (2)
+* **Ejemplo** (Construir base ortonormal)
 
 Sea $W$ un subespacio vectorial de $\mathbb{R}^n$ que tiene por base $\left\{(3,6,0), (1,2,2) \right\}$. Construya una base ortonormal para $W$.
 
@@ -110,7 +114,7 @@ $\dfrac{v_1}{\|v_1\|} = \dfrac{(0,0,2)}{\sqrt{0^2+0^2+2^2}}= \dfrac{(0,0,2)}{2} 
 Así finalmente una base ortonormal para $W$ es $\left\{ \dfrac{v_1}{\|v_1\|}, \dfrac{v_2}{\|v_2\|} \right\} = \left\{ \left( \dfrac{3}{\sqrt{45}}, \dfrac{6}{\sqrt{45}}, 0 \right), (0,0,1) \right\}$
 
 ----------------------------
-* Ejemplo (3)
+* **Ejemplo** (Construir base ortonormal)
 Encuentre una base ortonormal para el subespacio de $\mathbb{R}^4$ generado por los vectores $(1,1,1,1)$, $(0,1,1,1)$ y $(0,0,1,1)$.
 
 Solución: Usando el proceso de G-S, tenemos que
